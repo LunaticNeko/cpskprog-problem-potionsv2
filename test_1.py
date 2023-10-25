@@ -2,7 +2,7 @@
 
 TEST CODE
 01219114 Computer Programming
-Week 8, Long Program Assignment: Potion Shop (V1)
+Week 10, Long Program Assignment: Potion Shop (V2)
 (C) 2023 Chawanat Nakasan
 Department of Computer Engineering, Kasetsart University
 MIT License
@@ -23,7 +23,6 @@ def test_1a_object_creation():
     p0 = Potion()
     assert p0.name == 'Potion'
     assert p0.ingredients == []
-    assert p0.ingredient_value == 0
     assert p0.effects == []
 
     p1 = Potion('A')
@@ -47,7 +46,7 @@ def test_1c_add_ingredient_value():
         (ingr, val) = random.choice(all_ingr)
         p0.add_ingredient(ingr, val)
         total_val += val
-    assert p0.ingredient_value == total_val
+    assert p0.sale_price == int(total_val * 1.2)
 
 def test_1d_add_ingredient_count():
     p0 = Potion()
@@ -55,7 +54,7 @@ def test_1d_add_ingredient_count():
     for i in range(n_ingredients):
         (ingr, val) = random.choice(all_ingr)
         p0.add_ingredient(ingr, val)
-    assert p0.ingredient_count() == n_ingredients
+    assert p0.ingredient_count == n_ingredients
 
 temp = None
 
@@ -79,9 +78,12 @@ def test_1f_clear_effects():
 def test_1g_sale_price():
     p0 = Potion()
     n_ingredients = random.randint(20,30)
+    expected_value = 0
     for i in range(n_ingredients):
-        p0.add_ingredient(*random.choice(all_ingr))
-    assert p0.sale_price() == p0.ingredient_value * 1.2 // 1
+        ingr, value = random.choice(all_ingr)
+        p0.add_ingredient(ingr, value)
+        expected_value += value
+    assert p0.sale_price == int(expected_value * 1.2)
 
 def test_1h_comp_1():
     p0 = Potion()

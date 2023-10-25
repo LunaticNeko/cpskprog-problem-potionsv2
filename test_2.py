@@ -2,7 +2,7 @@
 
 TEST CODE
 01219114 Computer Programming
-Week 8, Long Program Assignment: Potion Shop (V1)
+Week 10, Long Program Assignment: Potion Shop (V2)
 (C) 2023 Chawanat Nakasan
 Department of Computer Engineering, Kasetsart University
 MIT License
@@ -23,12 +23,16 @@ def time_multipotions(n_potions, n_ingredients, n_tests):
     time_start = time.time()
     for i in range(n_potions):
         p = Potion()
+        expected_value = 0
         for j in range(n_ingredients):
-            p.add_ingredient(*random.choice(all_ingr))
+            ingr, value = random.choice(all_ingr)
+            p.add_ingredient(ingr, value)
+            expected_value += value
         if n_tests > 0:
             for k in range(n_tests):
-                p.ingredient_value
-                p.ingredient_count()
+                p.sale_price
+                p.ingredient_count
+        assert p.sale_price == int(expected_value * 1.2)
     time_end = time.time()
 
 def test_2a_time1():
@@ -56,3 +60,10 @@ def test_2d_time4():
     time_multipotions(3000, 100, 10000)
     time_end = time.time()
     assert time_end - time_start < 18 # time limit 18s
+
+def test_2e_time5():
+    """ same as above but even tougher """
+    time_start = time.time()
+    time_multipotions(6000, 100, 10000)
+    time_end = time.time()
+    assert time_end - time_start < 32 # time limit 32s
